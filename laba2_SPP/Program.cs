@@ -1,2 +1,11 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using laba2_SPP;
+
+class Program
+{
+    static void Main(string[] args)
+    {  
+        Faker faker = new Faker();
+
+        Console.ReadLine();
+    }
+}
