@@ -33,6 +33,9 @@ namespace laba2_SPP
 
             IGenerator intG = new IntGenerator();
             generators.Add(intG.getGeneratedType(), intG);
+
+            IGenerator charG = new CharGenerator();
+            generators.Add(charG.getGeneratedType(), charG);
         }
 
 
