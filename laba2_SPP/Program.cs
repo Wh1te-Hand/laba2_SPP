@@ -9,6 +9,9 @@ class Program
         byte byteValue = faker.Create<byte>();
         Console.WriteLine("{0}: {1}", byteValue.GetType(), byteValue);
 
+        int intValue = faker.Create<int>();
+        Console.WriteLine("{0}: {1}", intValue.GetType(),intValue);
+
         Console.ReadLine();
     }
 }

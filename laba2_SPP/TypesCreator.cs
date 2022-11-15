@@ -17,7 +17,7 @@ namespace laba2_SPP
             try
             {
                 LoadExistingGenerators();
-                LoadAdvancedGenerators();
+ //               LoadAdvancedGenerators();
             }
             catch
             {
@@ -31,15 +31,12 @@ namespace laba2_SPP
             IGenerator byteG = new ByteGenerator();
             generators.Add(byteG.getGeneratedType(), byteG);
 
-/*            IGenerator shortG = new ShortGenerator();
-            generators.Add(shortG.getGeneratedType(), shortG);
-
             IGenerator intG = new IntGenerator();
-            generators.Add(intG.getGeneratedType(), intG);*/
+            generators.Add(intG.getGeneratedType(), intG);
         }
 
 
-        private void LoadAdvancedGenerators()
+/*        private void LoadAdvancedGenerators()
         {
             string pathToAdvancedGeneratorsDll = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "..\\..\\..\\lib\\");
             string[] allDll = Directory.GetFiles(pathToAdvancedGeneratorsDll, "*.dll");
@@ -55,7 +52,7 @@ namespace laba2_SPP
                     }
                 }
             }
-        }
+        }*/
 
         public bool GeneratorExists(Type type)
         {
