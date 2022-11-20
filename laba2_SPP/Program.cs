@@ -18,6 +18,9 @@ class Program
         string stringValue = faker.Create<string>();
         Console.WriteLine("{0}: {1}", stringValue.GetType(), stringValue);
 
+        double doubleValue = faker.Create<double>();
+        Console.WriteLine("{0}: {1}", doubleValue.GetType(), doubleValue);
+
         Console.ReadLine();
     }
 }
