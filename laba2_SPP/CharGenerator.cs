@@ -9,7 +9,7 @@ namespace laba2_SPP
 {
     public class CharGenerator:IGenerator
     {
-        public object Generate()
+        public object Generate(Type typeToGenerate, GeneratorContext context)
         {
             var random = new Random();
             char result = (char)0;
@@ -20,9 +20,9 @@ namespace laba2_SPP
             return result;
         }
 
-        public Type getGeneratedType()
+        public Type getGeneratedType(Type type)
         {
-            return typeof(char);
+            return type=typeof(char);
         }
     }
 }

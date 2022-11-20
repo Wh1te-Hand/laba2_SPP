@@ -8,7 +8,7 @@ namespace laba2_SPP
 {
   public class IntGenerator:IGenerator
     {
-        public object Generate()
+        public object Generate(Type typeToGenerate, GeneratorContext context)
         {
             var random = new Random();
             int result = 0;
@@ -19,9 +19,9 @@ namespace laba2_SPP
             return result;
         }
 
-        public Type getGeneratedType()
+        public Type getGeneratedType(Type type)
         {
-            return typeof(int);
+            return type=typeof(int);
         }
     }
 }

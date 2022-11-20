@@ -6,99 +6,50 @@ using System.Threading.Tasks;
 
 namespace laba2_SPP
 {
-    public class Faker
+    public class Faker : IFaker
     {
-        private TypesCreator creator = new TypesCreator();
-        private List<Type> innerTypes = new List<Type>();
+        private readonly Dictionary<Type, IGenerator> generators;
+        private GeneratorContext generatorContext;
 
+        public Faker()
+        {
+            generators = GetGenerators();
+            generatorContext = new GeneratorContext(new Random(), this);
+        }
+
+        private Dictionary<Type, IGenerator> GetGenerators()
+        {
+            return new Dictionary<Type, IGenerator>() {
+                { typeof(int),new IntGenerator() },
+                { typeof(string),new StringGenerator() },
+                { typeof(byte),new ByteGenerator() },
+                { typeof(char),new CharGenerator() },
+                 };
+        }
+
+        public bool AddGenerator(KeyValuePair<Type, IGenerator> generator)
+        {
+            if (generators.ContainsKey(generator.Key))
+                return false;
+            generators.Add(generator.Key, generator.Value);
+            return true;
+        }
 
         public T Create<T>()
         {
-            T obj = (T)CreateDTO(typeof(T));
-            return obj;
+            return (T)Create(typeof(T));
         }
 
-        private object CreateDTO(Type type)
+        public object Create(Type t)
         {
-            if (creator.GeneratorExists(type))
+            generators.TryGetValue(t, out var generator);
+            if (generator == null)
             {
-                return creator.Create(type);
+                generator = (t.IsGenericType) ? generators[typeof(List<>)] : generators[typeof(object)];
             }
-            else
-            {
-                if (innerTypes.Contains(type))
-                {
-                    return null;
-                }
-                else
-                {
-                    innerTypes.Add(type);
-                    var obj = CreateWithConstructor(type);
-                    FillDTO(obj);
-                    innerTypes.Remove(type);
-                    return obj;
-                }
-            }
+            if (generator.getGeneratedType(t)==null)
+                throw new FakerException($"Cannot generate for type {t.Name}");
+            return generator.Generate(t, generatorContext);
         }
-        private object CreateWithConstructor(Type type)
-        {
-            try
-            {
-                var constructor = type.GetConstructors()[0];
-                var constrParams = constructor.GetParameters();
-                var createdConstParams = new List<object>();
-                if (constrParams.Any())
-                {
-                    foreach (var constrParam in constrParams)
-                    {
-                        createdConstParams.Add(CreateDTO(constrParam.ParameterType));
-                    }
-                }
-                return constructor.Invoke(createdConstParams.ToArray());
-            }
-            catch
-            {
-                try
-                {
-                    return Activator.CreateInstance(type);
-                }
-                catch
-                {
-                    return null;
-                }
-            }
-        }
-
-
-
-        private void FillDTO(object obj)
-        {
-            if (obj == null) { return; }
-
-            var properties = obj.GetType().GetProperties();
-            foreach (var property in properties)
-            {
-                if (property.SetMethod != null)
-                {
-                    var propertyObject = CreateDTO(property.PropertyType);
-                    property.SetValue(obj, propertyObject);
-                }
-            }
-
-            var fields = obj.GetType().GetFields();
-            foreach (var field in fields)
-            {
-                try
-                {
-                    var fieldObject = CreateDTO(field.FieldType);
-                    field.SetValue(obj, fieldObject);
-                }
-                catch
-                {
-                    field.SetValue(obj, null);
-                }
-            }
-        }
-
     }
 }

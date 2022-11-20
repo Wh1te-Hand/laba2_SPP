@@ -29,33 +29,16 @@ namespace laba2_SPP
         private void LoadExistingGenerators()
         {
             IGenerator byteG = new ByteGenerator();
-            generators.Add(byteG.getGeneratedType(), byteG);
+            generators.Add(byteG.getGeneratedType(typeof(Byte)), byteG);
 
             IGenerator intG = new IntGenerator();
-            generators.Add(intG.getGeneratedType(), intG);
+            generators.Add(intG.getGeneratedType(typeof(int)), intG);
 
             IGenerator charG = new CharGenerator();
-            generators.Add(charG.getGeneratedType(), charG);
+            generators.Add(charG.getGeneratedType(typeof(char)), charG);
         }
 
 
-/*        private void LoadAdvancedGenerators()
-        {
-            string pathToAdvancedGeneratorsDll = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "..\\..\\..\\lib\\");
-            string[] allDll = Directory.GetFiles(pathToAdvancedGeneratorsDll, "*.dll");
-            foreach (string dllPath in allDll)
-            {
-                Assembly asm = Assembly.LoadFrom(dllPath);
-                foreach (Type type in asm.GetExportedTypes())
-                {
-                    if (type.IsClass && typeof(IGenerator).IsAssignableFrom(type))
-                    {
-                        IGenerator g = (IGenerator)Activator.CreateInstance(type);
-                        generators.Add(g.getGeneratedType(), g);
-                    }
-                }
-            }
-        }*/
 
         public bool GeneratorExists(Type type)
         {
@@ -68,7 +51,7 @@ namespace laba2_SPP
 
         public object Create(Type type)
         {
-            return generators[type].Generate();
+            return generators[type].Generate(type,null);
         }
     }
 }
