@@ -21,6 +21,9 @@ class Program
         double doubleValue = faker.Create<double>();
         Console.WriteLine("{0}: {1}", doubleValue.GetType(), doubleValue);
 
+        double floatValue = faker.Create<float>();
+        Console.WriteLine("{0}: {1}", floatValue.GetType(), floatValue);
+
         Console.ReadLine();
     }
 }
