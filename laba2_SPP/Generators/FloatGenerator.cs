@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace laba2_SPP
+namespace laba2_SPP.Generators
 {
-    public class FloatGenerator:IGenerator
+    public class FloatGenerator : IGenerator
     {
         public Type getGeneratedType(Type type)
         {
@@ -16,7 +16,7 @@ namespace laba2_SPP
         public object Generate(Type typeToGenerate, GeneratorContext context)
         {
             Faker faker = new Faker();
-            return (float)(context.Random.NextSingle() + (float)faker.Create<byte>());
+            return context.Random.NextSingle() + faker.Create<byte>();
         }
     }
 }

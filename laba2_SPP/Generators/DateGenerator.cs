@@ -4,26 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace laba2_SPP
+namespace laba2_SPP.Generators
 {
-    public class ByteGenerator:IGenerator
+    public class DateGenerator : IGenerator
     {
-           
         public object Generate(Type typeToGenerate, GeneratorContext context)
         {
             var random = new Random();
-            byte result = 0;
-            while (result == 0)
-            {
-                result = (byte)random.Next(byte.MinValue, byte.MaxValue);
-            }
-            return result;
+            DateTime start = new DateTime(2002, 07, 30);
+            return start.AddDays(random.Next((DateTime.Today - start).Days));
         }
-
         public Type getGeneratedType(Type type)
         {
-            return type=typeof(byte);
+            return type = typeof(DateTime);
         }
-    
-}
+    }
 }

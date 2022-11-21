@@ -5,6 +5,7 @@ using System.Reflection.Emit;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using laba2_SPP.Generators;
 
 namespace laba2_SPP
 {
@@ -12,7 +13,7 @@ namespace laba2_SPP
     {
         private Dictionary<Type, IGenerator> generators = new Dictionary<Type, IGenerator>();
 
-        public TypesCreator()
+    /*    public TypesCreator()
         {
             try
             {
@@ -36,7 +37,7 @@ namespace laba2_SPP
 
             IGenerator charG = new CharGenerator();
             generators.Add(charG.getGeneratedType(typeof(char)), charG);
-        }
+        }*/
 
 
 
