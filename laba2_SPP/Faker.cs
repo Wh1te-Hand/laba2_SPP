@@ -25,7 +25,8 @@ namespace laba2_SPP
                 { typeof(byte),new ByteGenerator() },
                 { typeof(char),new CharGenerator() },
                 { typeof(double),new DoubleGenerator() }, 
-                { typeof(float),new FloatGenerator()}
+                { typeof(float),new FloatGenerator()},
+                { typeof(DateTime),new DateGenerator()}
                  };
         }
 

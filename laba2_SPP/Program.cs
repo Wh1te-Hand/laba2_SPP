@@ -24,6 +24,9 @@ class Program
         double floatValue = faker.Create<float>();
         Console.WriteLine("{0}: {1}", floatValue.GetType(), floatValue);
 
+        DateTime DateValue = faker.Create<DateTime>();
+        Console.WriteLine("{0}: {1}", DateValue.GetType(), DateValue);
+
         Console.ReadLine();
     }
 }
