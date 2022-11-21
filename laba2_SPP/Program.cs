@@ -27,6 +27,9 @@ class Program
         DateTime DateValue = faker.Create<DateTime>();
         Console.WriteLine("{0}: {1}", DateValue.GetType(), DateValue);
 
+        short shortValue = faker.Create<short>();
+        Console.WriteLine("{0}: {1}", shortValue.GetType(), shortValue);
+
         Console.ReadLine();
     }
 }

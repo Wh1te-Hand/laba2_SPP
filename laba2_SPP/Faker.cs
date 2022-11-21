@@ -56,14 +56,7 @@ namespace laba2_SPP
 
         public object Create(Type type)
         {
-            /* generators.TryGetValue(t, out var generator);
-             if (generator == null)
-             {
-                 generator = (t.IsGenericType) ? generators[typeof(List<>)] : generators[typeof(object)];
-             }
-             if (generator.getGeneratedType() == null)
-                 throw new FakerException($"Cannot generate for type {t.Name}");
-             return generator.Generate();*/
+
             object resultT;
             if (generators.ContainsKey(type))
             {
