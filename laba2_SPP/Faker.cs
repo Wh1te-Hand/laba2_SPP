@@ -21,11 +21,11 @@ namespace laba2_SPP
         private Dictionary<Type, IGenerator> GetGenerators()
         {
             return new Dictionary<Type, IGenerator>() {
-                { typeof(int),new IntGenerator() },
+               // { typeof(int),new IntGenerator() },
                 { typeof(string),new StringGenerator() },
                 { typeof(byte),new ByteGenerator() },
                 { typeof(char),new CharGenerator() },
-                { typeof(double),new DoubleGenerator() }, 
+               // { typeof(double),new DoubleGenerator() }, 
                 { typeof(float),new FloatGenerator()},
                 { typeof(DateTime),new DateGenerator()}
                  };
@@ -51,9 +51,9 @@ namespace laba2_SPP
             {
                 generator = (t.IsGenericType) ? generators[typeof(List<>)] : generators[typeof(object)];
             }
-            if (generator.getGeneratedType(t)==null)
+            if (generator.getGeneratedType()==null)
                 throw new FakerException($"Cannot generate for type {t.Name}");
-            return generator.Generate(t, generatorContext);
+            return generator.Generate();
         }
     }
 }

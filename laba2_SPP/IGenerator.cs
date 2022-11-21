@@ -8,8 +8,8 @@ namespace laba2_SPP
 {
     public interface IGenerator
     {
-        Type getGeneratedType(Type type);
-        object Generate(Type typeToGenerate, GeneratorContext context);
+        Type getGeneratedType();
+        object Generate();
     }
 }
 

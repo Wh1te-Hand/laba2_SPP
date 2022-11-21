@@ -8,15 +8,15 @@ namespace laba2_SPP.Generators
 {
     public class DateGenerator : IGenerator
     {
-        public object Generate(Type typeToGenerate, GeneratorContext context)
+        public object Generate()
         {
             var random = new Random();
             DateTime start = new DateTime(2002, 07, 30);
             return start.AddDays(random.Next((DateTime.Today - start).Days));
         }
-        public Type getGeneratedType(Type type)
+        public Type getGeneratedType()
         {
-            return type = typeof(DateTime);
+            return  typeof(DateTime);
         }
     }
 }

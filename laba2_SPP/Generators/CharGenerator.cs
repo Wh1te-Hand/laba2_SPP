@@ -12,16 +12,16 @@ namespace laba2_SPP.Generators
     {
         private readonly char[] chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".ToCharArray();
 
-        public object Generate(Type typeToGenerate, GeneratorContext context)
+        public object Generate()
         {
             var random = new Random();
             char result;
             return result = chars[random.Next(0, chars.Length - 1)];
         }
 
-        public Type getGeneratedType(Type type)
+        public Type getGeneratedType()
         {
-            return type = typeof(char);
+            return  typeof(char);
         }
     }
 }

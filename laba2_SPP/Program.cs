@@ -9,8 +9,8 @@ class Program
         byte byteValue = faker.Create<byte>();
         Console.WriteLine("{0}: {1}", byteValue.GetType(), byteValue);
 
-        int intValue = faker.Create<int>();
-        Console.WriteLine("{0}: {1}", intValue.GetType(),intValue);
+/*        int intValue = faker.Create<int>();
+        Console.WriteLine("{0}: {1}", intValue.GetType(),intValue);*/
 
         int charValue = faker.Create<char>();
         Console.WriteLine("{0}: {1}", charValue.GetType(), charValue);
@@ -18,8 +18,8 @@ class Program
         string stringValue = faker.Create<string>();
         Console.WriteLine("{0}: {1}", stringValue.GetType(), stringValue);
 
-        double doubleValue = faker.Create<double>();
-        Console.WriteLine("{0}: {1}", doubleValue.GetType(), doubleValue);
+/*        double doubleValue = faker.Create<double>();
+        Console.WriteLine("{0}: {1}", doubleValue.GetType(), doubleValue);*/
 
         double floatValue = faker.Create<float>();
         Console.WriteLine("{0}: {1}", floatValue.GetType(), floatValue);

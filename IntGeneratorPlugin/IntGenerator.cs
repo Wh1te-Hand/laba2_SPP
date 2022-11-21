@@ -4,7 +4,7 @@ namespace IntGeneratorPlugin
 {
     public class IntGenerator:IGenerator
     {
-        public object Generate(Type typeToGenerate, GeneratorContext context)
+        public object Generate()
         {
             var random = new Random();
             int result = 0;
@@ -15,9 +15,9 @@ namespace IntGeneratorPlugin
             return result;
         }
 
-        public Type getGeneratedType(Type type)
+        public Type getGeneratedType()
         {
-            return type = typeof(int);
+            return  typeof(int);
         }
 
     }

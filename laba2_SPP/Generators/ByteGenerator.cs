@@ -9,7 +9,7 @@ namespace laba2_SPP.Generators
     public class ByteGenerator : IGenerator
     {
 
-        public object Generate(Type typeToGenerate, GeneratorContext context)
+        public object Generate()
         {
             var random = new Random();
             byte result = 0;
@@ -20,9 +20,9 @@ namespace laba2_SPP.Generators
             return result;
         }
 
-        public Type getGeneratedType(Type type)
+        public Type getGeneratedType()
         {
-            return type = typeof(byte);
+            return  typeof(byte);
         }
 
     }

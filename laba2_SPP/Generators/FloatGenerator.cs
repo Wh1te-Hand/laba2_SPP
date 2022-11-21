@@ -8,15 +8,15 @@ namespace laba2_SPP.Generators
 {
     public class FloatGenerator : IGenerator
     {
-        public Type getGeneratedType(Type type)
-        {
-            return type = typeof(float);
-        }
-
-        public object Generate(Type typeToGenerate, GeneratorContext context)
+        public object Generate()
         {
             Faker faker = new Faker();
-            return context.Random.NextSingle() + faker.Create<byte>();
+            var random = new Random();
+            return random.NextSingle()+faker.Create<byte>();
+        }
+        public Type getGeneratedType()
+        {
+            return typeof(float);
         }
     }
 }

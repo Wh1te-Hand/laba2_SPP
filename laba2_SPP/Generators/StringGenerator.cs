@@ -12,19 +12,20 @@ namespace laba2_SPP.Generators
         private readonly char[] chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".ToCharArray();
         public int Limit { get; set; } = 50;
 
-        public Type getGeneratedType(Type type)
+        public object Generate()
         {
-            return type = typeof(string);
-        }
-
-        public object Generate(Type typeToGenerate, GeneratorContext context)
-        {
-            int len = context.Random.Next(1, Limit);
+            var random=new Random();
+            Faker faker = new Faker();
+            int len = random.Next(1, Limit);
             var result = new StringBuilder(len);
 
             for (int i = 0; i < len; i++)
-                result.Append(chars[context.Random.Next(chars.Length)]);
+                result.Append(chars[random.Next(0,chars.Length-1)]);
             return result.ToString();
+        }
+        public Type getGeneratedType()
+        {
+            return typeof(string);
         }
     }
 }

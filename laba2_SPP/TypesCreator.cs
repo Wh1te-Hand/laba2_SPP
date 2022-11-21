@@ -52,7 +52,7 @@ namespace laba2_SPP
 
         public object Create(Type type)
         {
-            return generators[type].Generate(type,null);
+            return generators[type].Generate();
         }
     }
 }
