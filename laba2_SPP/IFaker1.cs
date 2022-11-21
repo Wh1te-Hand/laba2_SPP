@@ -17,6 +17,6 @@ namespace laba2_SPP
         /// </summary>
         /// <param name="generator">generator for Faker</param>
         /// <returns>true if generator was added successfully, otherwise false - generator already exists</returns>
-        public bool AddGenerator(KeyValuePair<Type, IGenerator> generator);
+/*        public bool AddGenerator(KeyValuePair<Type, IGenerator> generator);*/
     }
 }

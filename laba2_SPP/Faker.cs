@@ -12,12 +12,10 @@ namespace laba2_SPP
     public class Faker : IFaker
     {
         private readonly Dictionary<Type, IGenerator> generators;
-        private GeneratorContext generatorContext;
-
+        private List<Type> innerTypes = new List<Type>();
         public Faker()
         {
             generators = GetGenerators();
-           // generatorContext = new GeneratorContext(new Random(), this);
         }
 
         private void ConnectDll(Dictionary<Type, IGenerator> generators)
@@ -39,7 +37,7 @@ namespace laba2_SPP
         }
         private Dictionary<Type, IGenerator> GetGenerators()
         {
-           Dictionary<Type, IGenerator> generators = new Dictionary<Type, IGenerator>() {
+            Dictionary<Type, IGenerator> generators = new Dictionary<Type, IGenerator>() {
                 { typeof(string),new StringGenerator() },
                 { typeof(byte),new ByteGenerator() },
                 { typeof(char),new CharGenerator() },
@@ -50,29 +48,126 @@ namespace laba2_SPP
             return generators;
         }
 
-        public bool AddGenerator(KeyValuePair<Type, IGenerator> generator)
-        {
-            if (generators.ContainsKey(generator.Key))
-                return false;
-            generators.Add(generator.Key, generator.Value);
-            return true;
-        }
 
         public T Create<T>()
         {
             return (T)Create(typeof(T));
         }
 
-        public object Create(Type t)
+        public object Create(Type type)
         {
-            generators.TryGetValue(t, out var generator);
-            if (generator == null)
+            /* generators.TryGetValue(t, out var generator);
+             if (generator == null)
+             {
+                 generator = (t.IsGenericType) ? generators[typeof(List<>)] : generators[typeof(object)];
+             }
+             if (generator.getGeneratedType() == null)
+                 throw new FakerException($"Cannot generate for type {t.Name}");
+             return generator.Generate();*/
+            object resultT;
+            if (generators.ContainsKey(type))
             {
-                generator = (t.IsGenericType) ? generators[typeof(List<>)] : generators[typeof(object)];
+                resultT = generators[type].Generate();
             }
-            if (generator.getGeneratedType() == null)
-                throw new FakerException($"Cannot generate for type {t.Name}");
-            return generator.Generate();
+            else
+            {
+                if (type.IsGenericType)
+                {
+                    var genericType = type.GetGenericArguments()[0];
+                    var listType = typeof(List<>).MakeGenericType(genericType);
+                    var list = (IList)Activator.CreateInstance(listType);
+                    for (int i = 0; i < 10; i++)
+                    {
+                        list.Add(Create(genericType));
+                    }
+                    resultT = Convert.ChangeType(list, listType);
+                }
+                else
+                {
+                    if (innerTypes.Contains(type))
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        innerTypes.Add(type);
+                        resultT = CreateObject(type);
+                        FillFieldsAndProperties(resultT);
+                        innerTypes.Remove(type);
+                    }
+                }
+            }
+            return resultT;
+        }
+
+        private object CreateObject(Type type)
+        {
+            try
+            {
+                var constructor = Constructor(type.GetConstructors(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance));
+                var constructorParameters = constructor.GetParameters();
+                List<object> parameters = new List<object>();
+
+                if (constructorParameters.Any())
+                {
+                    foreach (var parameter in constructorParameters)
+                    {
+                        parameters.Add(Create(parameter.ParameterType));
+                    }
+                }
+                return constructor.Invoke(parameters.ToArray());
+            }
+            catch
+            {
+                return Activator.CreateInstance(type);
+            }
+        }
+
+        private ConstructorInfo? Constructor(ConstructorInfo[] constructors)
+        {
+            if (constructors.Length > 1)
+            {
+                var AllConstructors =
+                constructors.OrderByDescending(ob => ob.GetParameters().Count()).ToList();
+                return AllConstructors[0];
+            }
+            else return constructors.First();
+        }
+        private void FillFieldsAndProperties(object resultT)
+        {
+            var type = resultT.GetType();
+            var publicFields = type.GetFields(BindingFlags.Public | BindingFlags.Static |
+               BindingFlags.Instance);
+
+            foreach (var field in publicFields)
+            {
+                try
+                {
+                    field.SetValue(resultT, Create(field.FieldType));
+                }
+                catch
+                {
+                    field.SetValue(resultT, null);
+                }
+            }
+
+            var properties = type.GetProperties();
+
+            foreach (var property in properties)
+            {
+                if (property.SetMethod != null)
+                {
+                    try
+                    {
+                        property.SetValue(resultT, Create(property.PropertyType));
+                    }
+                    catch
+                    {
+                        property.SetValue(resultT, null);
+                    }
+                }
+            }
         }
     }
 }
+
