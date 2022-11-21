@@ -5,9 +5,11 @@ VisualStudioVersion = 17.3.32819.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "laba2_SPP", "laba2_SPP\laba2_SPP.csproj", "{7D968FBD-4F3B-4923-B44B-2497D165FD9E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntGeneratorPlugin", "IntGeneratorPlugin\IntGeneratorPlugin.csproj", "{6C0959F4-8533-4D22-A79E-ABF98152110D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntGeneratorPlugin", "IntGeneratorPlugin\IntGeneratorPlugin.csproj", "{6C0959F4-8533-4D22-A79E-ABF98152110D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoubleGeneratorPlugin", "DoubleGenerator\DoubleGeneratorPlugin.csproj", "{3D7E2D29-AB4E-42ED-8C00-B217C0ECB051}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DoubleGeneratorPlugin", "DoubleGenerator\DoubleGeneratorPlugin.csproj", "{3D7E2D29-AB4E-42ED-8C00-B217C0ECB051}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakerTest", "FakerTest\FakerTest.csproj", "{1CBC07C8-C54C-4130-B1D4-F9E3DDEF63BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{3D7E2D29-AB4E-42ED-8C00-B217C0ECB051}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D7E2D29-AB4E-42ED-8C00-B217C0ECB051}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D7E2D29-AB4E-42ED-8C00-B217C0ECB051}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CBC07C8-C54C-4130-B1D4-F9E3DDEF63BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CBC07C8-C54C-4130-B1D4-F9E3DDEF63BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CBC07C8-C54C-4130-B1D4-F9E3DDEF63BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CBC07C8-C54C-4130-B1D4-F9E3DDEF63BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
